@@ -7,10 +7,17 @@ function createCharMap(text) {
     });
     return charMap;
 }
+function hideChars(words, difficultyPercent = 0.5) {
+    return words.map(word => {
+        return word.split("").map(char => {
+            return { char, hidden: Math.random() < difficultyPercent }
+        })
+    })
+}
 export function makePuzzle(text) {
     text = text.toUpperCase()
     return {
-        words: text.split(" "),
+        words: hideChars(text.split(" ")),
         charMap: createCharMap(text)
     }
 }

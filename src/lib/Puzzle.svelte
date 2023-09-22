@@ -14,11 +14,11 @@
                 <span class="char">
                     <input
                         type="text"
-                        bind:value={char}
+                        value={char.hidden? "" : char.char}
                         maxlength="1"
-                        readonly={true}
+                        readonly={!char.hidden}
                     />
-                    <div class="key">{puzzle.charMap[char]}</div>
+                    <div class="key">{puzzle.charMap[char.char]}</div>
                 </span>
             {/each}
             <span class="whitespace" />
@@ -48,6 +48,6 @@
         display: inline;
     }
     div .key {
-      color: rgba(255, 255, 255, 0.35);
+        color: rgba(255, 255, 255, 0.35);
     }
 </style>

@@ -1,5 +1,4 @@
-function createCharMap(text) {
-    const uniqueChars = text.split("").filter((i, index, self) => self.indexOf(i) === index && i !== " ");
+function _createCharMap(uniqueChars) {
     const uniqueCodes = uniqueChars.map((i) => i.charCodeAt(0)).sort((a, b) => 0.5 - Math.random());
     let charMap = {};
     uniqueChars.forEach((element, index) => {
@@ -7,17 +6,22 @@ function createCharMap(text) {
     });
     return charMap;
 }
-function hideChars(words, difficultyPercent = 0.5) {
-    return words.map(word => {
-        return word.split("").map(char => {
-            return { char, hidden: Math.random() < difficultyPercent }
-        })
-    })
+function _hideChars(uniqueChars, difficultyPercent) {
+    let chars = []
+    for (const i of uniqueChars) {
+        if (Math.random() < difficultyPercent) {
+            chars.push(i)
+        }
+    }
+    return chars
 }
-export function makePuzzle(text) {
+export function makePuzzle(text, difficultyPercent = 0.7) {
     text = text.toUpperCase()
+    let uniqueChars = text.split("").filter((i, index, self) => self.indexOf(i) === index && i !== " ")
+    const hiddenChars = _hideChars(uniqueChars, difficultyPercent);
     return {
-        words: hideChars(text.split(" ")),
-        charMap: createCharMap(text)
+        hiddenChars,
+        words: text.split(" "),
+        charMap: _createCharMap(uniqueChars)
     }
 }

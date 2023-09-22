@@ -1,10 +1,23 @@
 <script>
     import { makePuzzle } from "./puzzleMaker";
+    function updatePuzzle(e) {
+        e.target.value = e.target.value.toUpperCase();
+        // update all the other inputs
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+            if (input.name === e.target.name) {
+                input.value = e.target.value;
+            }
+        });
+    }
+    function charIsHidden(char, puzzle) {
+        return puzzle.hiddenChars.includes(char);
+    }
     let quote = {
         text: "Today is a great day for a great day",
         author: "John Nolan",
     };
-    const puzzle = makePuzzle(quote.text);
+    const puzzle = makePuzzle(quote.text, 0.9);
 </script>
 
 <div class="quote">
@@ -13,12 +26,14 @@
             {#each word as char}
                 <span class="char">
                     <input
+                        name={char}
                         type="text"
-                        value={char.hidden? "" : char.char}
+                        value={charIsHidden(char, puzzle) ? "" : char}
+                        on:input={updatePuzzle}
                         maxlength="1"
-                        readonly={!char.hidden}
+                        readonly={!charIsHidden(char, puzzle)}
                     />
-                    <div class="key">{puzzle.charMap[char.char]}</div>
+                    <div class="key">{puzzle.charMap[char]}</div>
                 </span>
             {/each}
             <span class="whitespace" />

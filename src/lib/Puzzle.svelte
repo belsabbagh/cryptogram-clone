@@ -1,25 +1,48 @@
 <script>
     import { makePuzzle } from "./puzzleMaker";
-    function updatePuzzle(e) {
-        e.target.value = e.target.value.toUpperCase();
-        // update all the other inputs
-        const inputs = document.querySelectorAll("input");
-        inputs.forEach((input) => {
-            if (input.name === e.target.name) {
-                input.value = e.target.value;
-            }
-        });
+
+    function isValidInput(input) {
+        return /^[a-zA-Z]+$/.test(input);
     }
+
+    function updatePuzzle(e) {
+        if (!isValidInput(e.target.value)) {
+            e.target.value = "";
+        }
+        e.target.value = e.target.value.toUpperCase();
+        const inputs = document.querySelectorAll("input");
+        for (const i of inputs) {
+            if (i.name === e.target.name) {
+                i.value = e.target.value;
+            }
+        }
+        if (getInput() === puzzle.answerKey) {
+            document.getElementById("status").innerHTML = "Correct!";
+            inputs.forEach((i) => (i.readOnly = true));
+        }
+    }
+
     function charIsHidden(char, puzzle) {
         return puzzle.hiddenChars.includes(char);
     }
+
+    function getInput() {
+        const inputs = document.querySelectorAll("input");
+        let answer = "";
+        for (const i of inputs) {
+            answer += i.value;
+        }
+        return answer;
+    }
+
     let quote = {
-        text: "Today is a great day for a great day",
+        text: "My nana used to say today is a great day for a great day",
         author: "John Nolan",
     };
     const puzzle = makePuzzle(quote.text, 0.9);
 </script>
 
+<div id="status" />
 <div class="quote">
     {#each puzzle.words as word}
         <span class="word">
@@ -33,7 +56,14 @@
                         maxlength="1"
                         readonly={!charIsHidden(char, puzzle)}
                     />
-                    <div class="key">{puzzle.charMap[char]}</div>
+                    <div
+                        class="key"
+                        style={charIsHidden(char, puzzle)
+                            ? ""
+                            : "color: transparent;"}
+                    >
+                        {puzzle.charMap[char]}
+                    </div>
                 </span>
             {/each}
             <span class="whitespace" />
@@ -59,10 +89,20 @@
         width: 1.5rem;
         margin: 0.3rem;
     }
-    div .quote {
+    .quote {
         display: inline;
     }
-    div .key {
+    .key {
         color: rgba(255, 255, 255, 0.35);
+    }
+    .author {
+        padding: 0.5rem 0 0.5rem 0;
+        text-align: end;
+        color: rgba(255, 255, 255, 0.35);
+    }
+    #status {
+        margin-bottom: 2rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 2rem;
     }
 </style>

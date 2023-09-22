@@ -15,6 +15,9 @@ function _hideChars(uniqueChars, difficultyPercent) {
     }
     return chars
 }
+function _makeAnswer(text) {
+    return text.toUpperCase().replace(/[^a-zA-Z]/g, "");
+}
 export function makePuzzle(text, difficultyPercent = 0.7) {
     text = text.toUpperCase()
     let uniqueChars = text.split("").filter((i, index, self) => self.indexOf(i) === index && i !== " ")
@@ -22,6 +25,7 @@ export function makePuzzle(text, difficultyPercent = 0.7) {
     return {
         hiddenChars,
         words: text.split(" "),
-        charMap: _createCharMap(uniqueChars)
+        charMap: _createCharMap(uniqueChars),
+        answerKey: _makeAnswer(text)
     }
 }

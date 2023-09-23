@@ -83,25 +83,29 @@
             {#each word as char}
                 <span class="char">
                     {#if isValidInput(char)}
-                        <input
-                            name={char}
-                            id={char + Math.random()}
-                            type="text"
-                            value={charIsHidden(char, puzzle) ? "" : char}
-                            on:input={updatePuzzle}
-                            on:focus={actionColorOthers}
-                            maxlength="1"
-                            readonly={!charIsHidden(char, puzzle)}
-                        />
                         {#if charIsHidden(char, puzzle)}
-                            <div class="key">
+                            <input
+                                name={char}
+                                id={char + Math.random()}
+                                type="text"
+                                value={charIsHidden(char, puzzle) ? "" : char}
+                                on:input={updatePuzzle}
+                                on:focus={actionColorOthers}
+                                maxlength="1"
+                                readonly={!charIsHidden(char, puzzle)}
+                            />
+                            <span class="key">
                                 {puzzle.charMap[char]}
+                            </span>
+                        {:else}
+                            <div class="solved-char">
+                                {char}
                             </div>
                         {/if}
                     {:else}
-                        <div class="special-char">
+                        <span class="special-char">
                             {char}
-                        </div>
+                        </span>
                     {/if}
                 </span>
             {/each}
@@ -116,38 +120,57 @@
         display: inline-block;
         vertical-align: top;
     }
-    span .whitespace {
+
+    .whitespace {
         margin: 0 0.3rem 0 0.3rem;
     }
+
     input {
-        inherits: none;
         background-color: transparent;
         border: none;
         border-bottom: 1px solid white;
         font-size: larger;
         text-align: center;
-        width: 1.5rem;
-        margin: 0.3rem;
+        width: 1.6rem;
+        margin: 0 0.3rem 0 0.3rem;
+        display: inline-block;
+        vertical-align: top;
+        line-height: 1.6rem;
+        padding: 0;
+    }
+
+    .solved-char {
+        border: none;
+        border-bottom: 1px solid white;
+        font-size: larger;
+        text-align: center;
+        width: 1.6rem;
+        margin: 0 0.3rem 0 0.3rem;
+        vertical-align: top;
+        line-height: 1.6rem;
+        padding: 0;
     }
 
     input:focus {
         outline: none;
         border-bottom: 1px solid #aa0000;
     }
-    .quote {
-        display: inline;
-    }
+
     .key {
+        display: block;
         color: rgba(255, 255, 255, 0.35);
     }
+
     .author {
         padding: 0.5rem 0 0.5rem 0;
         text-align: end;
         color: rgba(255, 255, 255, 0.35);
     }
+
     .special-char {
         margin: 0.3rem;
     }
+
     #status {
         margin-bottom: 2rem;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

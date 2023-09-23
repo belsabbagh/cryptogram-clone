@@ -15,8 +15,14 @@ function _hideChars(uniqueChars, difficultyPercent) {
     }
     return chars
 }
-function _makeAnswer(text) {
-    return text.toUpperCase().replace(/[^a-zA-Z]/g, "");
+function _makeAnswerKey(text, hiddenChars) {
+    let key = ""
+    for (const i of text) {
+        if (hiddenChars.indexOf(i) !== -1) {
+            key += i
+        }
+    }
+    return key
 }
 export function makePuzzle(quote, difficultyPercent = 0.7) {
     let text = quote.text.toUpperCase()
@@ -24,9 +30,9 @@ export function makePuzzle(quote, difficultyPercent = 0.7) {
     const hiddenChars = _hideChars(uniqueChars, difficultyPercent);
     return {
         hiddenChars,
+        answerKey: _makeAnswerKey(text, hiddenChars),
         words: text.split(" "),
         charMap: _createCharMap(uniqueChars),
-        answerKey: _makeAnswer(text),
         author: quote.author
     }
 }

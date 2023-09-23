@@ -15,13 +15,22 @@
     function makePuzzleAction(_e) {
         puzzle = makePuzzle(getRandomQuote(), difficulties[difficulty]);
     }
-    
+
     function getRandomQuote() {
         return quotes[Math.floor(Math.random() * quotes.length)];
     }
 
     function setDifficultyAction(e) {
         puzzle = makePuzzle(getRandomQuote(), difficulties[e.target.value]);
+    }
+
+    function submitQuote(e) {
+        e.preventDefault();
+        const text = e.target.quote.value;
+        const author = e.target.author.value;
+        quotes.push({ text, author });
+        
+        e.target.reset();
     }
 </script>
 
@@ -38,7 +47,23 @@
         <Puzzle {puzzle} />
     </div>
     <button class="next" on:click={makePuzzleAction}>Next</button>
+    <div>
+        <h2>Add a quote</h2>
+        <form on:submit={submitQuote}>
+            <label for="quote">Quote</label>
+            <textarea name="quote" id="quote" cols="30" rows="5" />
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </main>
 
 <style>
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: fit-content;
+        margin: auto;
+    }
 </style>

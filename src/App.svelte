@@ -1,13 +1,13 @@
 <script>
-    import NewQuoteForm from "./NewQuoteForm.svelte";
+    import NewQuoteForm from "./lib/NewQuoteForm.svelte";
 
-    import Stopwatch from "./Stopwatch.svelte";
-    import { getRandomQuote } from "./lib/quotes";
+    import Stopwatch from "./lib/Stopwatch.svelte";
+    import { getRandomQuote } from "./core/quotes";
     import Puzzle from "./lib/Puzzle.svelte";
-    import puzzle from "./lib/puzzleStore";
-    import { getALlInputs } from "./lib/dom";
-    import { makePuzzle, PRESET_DIFFICULTIES } from "./lib/puzzleMaker";
-    import { time } from "./lib/time";
+    import { puzzle } from "./stores/puzzle";
+    import { getALlInputs } from "./core/dom";
+    import { makePuzzle, PRESET_DIFFICULTIES } from "./core/puzzleMaker";
+    import { time } from "./stores/time";
 
     function newPuzzle(quote, difficulty) {
         puzzle.set(makePuzzle(quote, difficulty));

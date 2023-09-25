@@ -1,7 +1,7 @@
 <script>
     import { isAlpha } from "./text";
-    import { getALlInputs } from "./dom";
-    import puzzle from "./puzzleStore";
+    import { getALlInputs } from "../core/dom";
+    import { puzzle } from "../stores/puzzle";
     const FOCUS_RGBA = "rgba(255, 0, 0, 1)";
 
     function charIsHidden(char, puzzle) {

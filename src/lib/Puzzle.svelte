@@ -1,6 +1,6 @@
 <script>
     import Word from "./Word.svelte";
-    import puzzle from "./puzzleStore";
+    import { puzzle } from "../stores/puzzle";
 </script>
 
 <div class="quote">

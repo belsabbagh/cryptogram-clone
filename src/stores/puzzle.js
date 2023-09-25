@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export default writable({
+export const puzzle = writable({
     hiddenChars: [],
     answerKey: "",
     words: [],

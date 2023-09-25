@@ -1,5 +1,5 @@
 <script>
-    import { time } from "./lib/time";
+    import { time } from "../stores/time";
 
     function secondsToTime(seconds) {
         const r = seconds % 60;

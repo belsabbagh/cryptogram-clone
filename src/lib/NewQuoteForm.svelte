@@ -1,5 +1,5 @@
 <script>
-    import { quotes } from "./lib/quotes";
+    import { quotes } from "../core/quotes";
 
     function submitQuote(e) {
         e.preventDefault();

@@ -1,23 +1,17 @@
 <script>
     import { isAlpha } from "../core/text";
-    import { getALlInputs } from "../core/dom";
+    import { colorOthers, getALlInputs } from "../core/dom";
     import { puzzle } from "../stores/puzzle";
-    const FOCUS_RGBA = "rgba(255, 0, 0, 1)";
 
-    function colorInput(input, name) {
-        input.style.color = input.name === name ? FOCUS_RGBA : "white";
-        input.style.borderBottom =
-            input.name === name ? `1px solid ${FOCUS_RGBA}` : "1px solid white";
-    }
     function actionColorOthers(e) {
         if ($puzzle.isFinished) return;
         colorOthers(e.target.name);
     }
-
-    function colorOthers(name) {
-        getALlInputs().forEach((i) => colorInput(i, name));
-    }
     function updatePuzzle(e) {
+        if (e.target.value.length > 1) {
+            e.target.value = "";
+            return;
+        }
         if (!isAlpha(e.target.value)) {
             e.target.value = "";
         }

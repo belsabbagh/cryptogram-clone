@@ -1,5 +1,5 @@
 <script>
-    import { isAlpha } from "../core/text";
+    import { sanitizeInput } from "../core/text";
     import { colorOthers, getALlInputs } from "../core/dom";
     import { puzzle } from "../stores/puzzle";
 
@@ -7,15 +7,9 @@
         if ($puzzle.isFinished) return;
         colorOthers(e.target.name);
     }
+
     function updatePuzzle(e) {
-        if (e.target.value.length > 1) {
-            e.target.value = e.target.value[0];
-            return;
-        }
-        if (!isAlpha(e.target.value)) {
-            e.target.value = "";
-        }
-        e.target.value = e.target.value.toUpperCase();
+        e.target.value = sanitizeInput(e.target.value);
         const inputs = getALlInputs();
         for (const i of inputs) {
             if (i.name === e.target.name) {

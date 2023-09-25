@@ -1,17 +1,13 @@
 <script>
+    import NewQuoteForm from "./NewQuoteForm.svelte";
+
+    import Stopwatch from "./Stopwatch.svelte";
+    import { getRandomQuote } from "./lib/quotes";
     import Puzzle from "./lib/Puzzle.svelte";
     import puzzle from "./lib/puzzleStore";
-    import { quotes } from "./assets/quotes.json";
     import { getALlInputs } from "./lib/dom";
-    import { makePuzzle } from "./lib/puzzleMaker";
+    import { makePuzzle, PRESET_DIFFICULTIES } from "./lib/puzzleMaker";
     import { time } from "./lib/time";
-    import { onDestroy } from "svelte";
-    let difficulties = {
-        easy: 0.5,
-        normal: 0.65,
-        hard: 0.8,
-        legendary: 1,
-    };
 
     function newPuzzle(quote, difficulty) {
         puzzle.set(makePuzzle(quote, difficulty));
@@ -20,15 +16,11 @@
     }
 
     function makePuzzleAction(_e) {
-        newPuzzle(getRandomQuote(), difficulties[difficulty]);
-    }
-
-    function getRandomQuote() {
-        return quotes[Math.floor(Math.random() * quotes.length)];
+        newPuzzle(getRandomQuote(), PRESET_DIFFICULTIES[difficulty]);
     }
 
     function setDifficultyAction(e) {
-        newPuzzle(quote, difficulties[e.target.value]);
+        newPuzzle(quote, PRESET_DIFFICULTIES[e.target.value]);
     }
 
     function resetInputs() {
@@ -43,23 +35,9 @@
         resetInputs();
     }
 
-    function secondsToTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const r = seconds % 60;
-        return `${minutes}:${r < 10 ? "0" : ""}${r}`;
-    }
-
-    function submitQuote(e) {
-        e.preventDefault();
-        const text = e.target.quote.value;
-        const author = e.target.author.value;
-        quotes.push({ text, author });
-
-        e.target.reset();
-    }
     let difficulty = "easy";
     let quote = getRandomQuote();
-    puzzle.set(makePuzzle(quote, difficulties[difficulty]));
+    puzzle.set(makePuzzle(quote, PRESET_DIFFICULTIES[difficulty]));
 </script>
 
 <main>
@@ -73,7 +51,7 @@
     </select>
     <div class="timer">
         <span>Time: </span>
-        <span>{secondsToTime($time)}</span>
+        <Stopwatch />
     </div>
     <div class="card">
         <div id="status">
@@ -87,23 +65,11 @@
     <button on:click={startOverAction}>Clear</button>
     <div>
         <h2>Add a quote</h2>
-        <form on:submit={submitQuote}>
-            <label for="quote">Quote</label>
-            <textarea name="quote" id="quote" cols="30" rows="5" />
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" />
-            <button type="submit">Submit</button>
-        </form>
+        <NewQuoteForm />
     </div>
 </main>
 
 <style>
-    form {
-        display: flex;
-        flex-direction: column;
-        max-width: fit-content;
-        margin: auto;
-    }
     #status {
         margin-bottom: 2rem;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

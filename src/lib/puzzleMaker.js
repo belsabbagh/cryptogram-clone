@@ -40,3 +40,10 @@ export function makePuzzle(quote, difficultyPercent = 0.7) {
         isFinished: false
     }
 }
+
+export const PRESET_DIFFICULTIES = {
+    easy: 0.5,
+    normal: 0.65,
+    hard: 0.8,
+    legendary: 1,
+};

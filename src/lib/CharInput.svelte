@@ -9,7 +9,7 @@
     }
     function updatePuzzle(e) {
         if (e.target.value.length > 1) {
-            e.target.value = "";
+            e.target.value = e.target.value[0];
             return;
         }
         if (!isAlpha(e.target.value)) {

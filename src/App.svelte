@@ -61,8 +61,8 @@
         </div>
         <Puzzle />
     </div>
-    <button class="next" on:click={makePuzzleAction}>Next</button>
     <button on:click={startOverAction}>Clear</button>
+    <button class="next" on:click={makePuzzleAction}>Next</button>
     <div>
         <h2>Add a quote</h2>
         <NewQuoteForm />

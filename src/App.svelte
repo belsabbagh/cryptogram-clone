@@ -51,7 +51,7 @@
             if (inputs.length === 0) return;
             inputs[0].focus();
         }
-        if (e.keyCode !== 9) {
+        if (![8, 9, 16, 17].includes(e.keyCode)) {
             e.preventDefault();
         }
     }

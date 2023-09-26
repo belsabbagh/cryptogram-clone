@@ -35,13 +35,20 @@
         resetInputs();
     }
 
+    function handleKeyDown(e) {
+        if (e.key === "Enter") {
+            if (!$puzzle.isFinished) return;
+            document.getElementById("next").click();
+        }
+    }
+
     let difficulty = "easy";
     let quote = getRandomQuote();
     puzzle.set(makePuzzle(quote, PRESET_DIFFICULTIES[difficulty]));
 </script>
 
+<header><h1>Cryptogram</h1></header>
 <main>
-    <h1>Cryptogram</h1>
     Choose difficulty:
     <select on:change={setDifficultyAction} bind:value={difficulty}>
         <option value="easy">Easy</option>
@@ -61,18 +68,36 @@
         </div>
         <Puzzle />
     </div>
-    <button on:click={startOverAction}>Clear</button>
-    <button class="next" on:click={makePuzzleAction}>Next</button>
-    <div>
+    <div class="controls">
+        <button on:click={startOverAction}>Clear</button>
+        <button
+            id="next"
+            class="next"
+            on:click={makePuzzleAction}
+            disabled={!$puzzle.isFinished}>Next</button
+        >
+    </div>
+
+    <!-- <div>
         <h2>Add a quote</h2>
         <NewQuoteForm />
-    </div>
+    </div> -->
 </main>
+
+<svelte:window on:keydown={handleKeyDown} />
 
 <style>
     #status {
         margin-bottom: 2rem;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-size: 2rem;
+    }
+    .controls {
+        /* stick to bottom */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
     }
 </style>

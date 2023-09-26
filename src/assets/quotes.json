@@ -1,36 +1,44 @@
 {
     "quotes": [
         {
-            "text": "My nana used to say today is a great day for a great day",
-            "author": "John Nolan"
+            "text": "My nana used to say today is a great day for a great day.",
+            "author": "John Nolan\nFrom \"The Rookie\""
         },
         {
-            "text": "Get that woman out of your house",
-            "author": "Wade Grey"
+            "text": "Get that woman out of your house.",
+            "author": "Wade Grey\nFrom \"The Rookie\""
         },
         {
-            "text": "I thought Charlie was a guy",
-            "author": "Angela Lopez"
+            "text": "I thought Charlie was a guy.",
+            "author": "Angela Lopez\nFrom \"The Rookie\""
         },
         {
-            "text": "Rookie day is christmas and the purge in one",
-            "author": "Timothy Bradford"
+            "text": "I love Rookie Day. It’s Christmas and the Purge in one.",
+            "author": "Timothy Bradford\nFrom \"The Rookie\""
         },
         {
-            "text": "Don’t make me pull the \"buried alive\" card",
-            "author": "Lucy Chen"
+            "text": "Don’t make me pull the \"buried alive\" card.",
+            "author": "Lucy Chen\nFrom \"The Rookie\""
         },
         {
-            "text": "The only way to show you I'm a good cop is to show you I'm a good cop",
-            "author": "Angela Lopez"
+            "text": "The only way to show you I'm a good cop is to show you I'm a good cop.",
+            "author": "Angela Lopez\nFrom \"The Rookie\""
         },
         {
-            "text": "I would shut that down so fast",
-            "author": "Celina Juarez"
+            "text": "I would shut that down so fast.",
+            "author": "Celina Juarez\nFrom \"The Rookie\""
         },
         {
-            "text": "In my mind, I'm hitting you right now",
-            "author":"Lucy Chen"
+            "text": "In my mind, I'm hitting you right now.",
+            "author":"Lucy Chen\nFrom \"The Rookie\""
+        },
+        {
+            "text": "Nothing like a traumatic event to make you realize that your life is empty.",
+            "author": "Pam\nFrom \"The Rookie\""
+        },
+        {
+            "text": "I just found out this morning that Bailey has been dead more than once.",
+            "author": "John Nolan\nFrom \"The Rookie\""
         }
     ]
 }

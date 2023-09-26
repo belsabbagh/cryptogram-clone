@@ -1,6 +1,9 @@
 <script>
     import Word from "./Word.svelte";
     import { puzzle } from "../stores/puzzle";
+    function formatAuthor(name) {
+        return name.replace(/\n/g, "<br>");
+    }
 </script>
 
 <div class="quote">
@@ -8,7 +11,7 @@
         <Word {word} />
     {/each}
 </div>
-<div class="author">{$puzzle.author}</div>
+<div class="author">{@html formatAuthor($puzzle.author)}</div>
 
 <style>
     .author {

@@ -1,10 +1,18 @@
 import { isAlpha } from "./text";
 
 function _createCharMap(uniqueChars) {
-    const uniqueCodes = uniqueChars.map((i) => i.charCodeAt(0)).sort((a, b) => 0.5 - Math.random());
+    const allChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const puzzleChars = allChars.split("").filter((i) => uniqueChars.indexOf(i) === -1);
+    if (puzzleChars.length < uniqueChars.length) {
+        const extra = uniqueChars.length - puzzleChars.length;
+        for (let i = 0; i < extra; i++) {
+            puzzleChars.push(uniqueChars[i]);
+        }
+    }
     let charMap = {};
     uniqueChars.forEach((element, index) => {
-        charMap[element] = String.fromCharCode(uniqueCodes[index]);
+        let k = puzzleChars[index];
+        charMap[element] = k;
     });
     return charMap;
 }

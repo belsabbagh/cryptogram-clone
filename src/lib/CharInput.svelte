@@ -60,6 +60,10 @@
     on:input={updatePuzzle}
     on:focus={actionColorOthers}
     maxlength="1"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="on"
+    spellcheck="false"
 />
 
 <style>

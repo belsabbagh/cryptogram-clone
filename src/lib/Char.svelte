@@ -4,10 +4,6 @@
     import { isAlpha } from "../core/text";
     import { puzzle } from "../stores/puzzle";
 
-    function charIsHidden(char, puzzle) {
-        return puzzle.hiddenChars.includes(char);
-    }
-
     function specialCharStyle(char) {
         return `special-char ${char === "," ? "comma" : ""}`;
     }
@@ -16,7 +12,7 @@
 
 <span class="char">
     {#if isAlpha(char)}
-        {#if charIsHidden(char, $puzzle)}
+        {#if $puzzle.hiddenChars.includes(char)}
             <CharInput name={char} />
             <span class="key">
                 {$puzzle.charMap[char]}

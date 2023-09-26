@@ -12,3 +12,8 @@ export function sanitizeInput(val) {
     val = val.toUpperCase();
     return val;
 }
+
+export function secondsToTime(seconds) {
+    const r = seconds % 60;
+    return `${Math.floor(seconds / 60)}:${r < 10 ? "0" : ""}${r}`;
+}

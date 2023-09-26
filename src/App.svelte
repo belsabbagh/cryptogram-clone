@@ -8,6 +8,8 @@
     import { getALlInputs } from "./core/dom";
     import { makePuzzle, PRESET_DIFFICULTIES } from "./core/puzzleMaker";
     import { time } from "./stores/time";
+    import Char from "./lib/Char.svelte";
+    import { secondsToTime } from "./core/text";
 
     function newPuzzle(quote, difficulty) {
         puzzle.set(makePuzzle(quote, difficulty));
@@ -47,25 +49,30 @@
     puzzle.set(makePuzzle(quote, PRESET_DIFFICULTIES[difficulty]));
 </script>
 
-<header><h1>Cryptogram</h1></header>
+<header>
+    <h1>Cryptogram</h1>
+</header>
 <main>
-    Choose difficulty:
-    <select on:change={setDifficultyAction} bind:value={difficulty}>
-        <option value="easy">Easy</option>
-        <option value="normal">Normal</option>
-        <option value="hard">Hard</option>
-        <option value="legendary">Legendary</option>
-    </select>
-    <div class="timer">
-        <span>Time: </span>
+    <div class="timer" />
+    <div id="status">
         <Stopwatch />
+        {#if $puzzle.isFinished}
+            You solved it!
+        {:else}
+            Solve the puzzle!
+        {/if}
     </div>
+    <div class="difficulty">
+        Difficulty:
+        <select on:change={setDifficultyAction} bind:value={difficulty}>
+            <option value="easy">Easy</option>
+            <option value="normal">Normal</option>
+            <option value="hard">Hard</option>
+            <option value="legendary">Legendary</option>
+        </select>
+    </div>
+
     <div class="card">
-        <div id="status">
-            {#if $puzzle.isFinished}
-                Correct!
-            {/if}
-        </div>
         <Puzzle />
     </div>
     <div class="controls">
@@ -88,6 +95,9 @@
 
 <style>
     #status {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         margin-bottom: 2rem;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-size: 2rem;
@@ -99,5 +109,20 @@
         left: 0;
         width: 100%;
         padding: 1rem;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        place-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    select {
+        margin-left: 0.35rem;
+        padding-left: 0.2rem;
     }
 </style>

@@ -5,7 +5,7 @@
     import { puzzle } from "../stores/puzzle";
 
     function specialCharStyle(char) {
-        return `special-char ${char === "," ? "comma" : ""}`;
+        return `special-char ${[",", "."].includes(char) ? "low" : "high"}`;
     }
     export let char;
 </script>
@@ -56,7 +56,14 @@
         color: rgba(255, 255, 255, 0.35);
     }
 
-    .comma {
+    .special-char {
+        font-size: larger;
+        margin: 0rem;
+    }
+    .low {
         margin-top: 0.5rem;
+    }
+    .high {
+        margin-top: -0.1rem;
     }
 </style>

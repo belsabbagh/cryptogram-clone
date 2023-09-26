@@ -8,8 +8,6 @@
     import { getALlInputs } from "./core/dom";
     import { makePuzzle, PRESET_DIFFICULTIES } from "./core/puzzleMaker";
     import { time } from "./stores/time";
-    import Char from "./lib/Char.svelte";
-    import { secondsToTime } from "./core/text";
 
     function newPuzzle(quote, difficulty) {
         puzzle.set(makePuzzle(quote, difficulty));
@@ -42,15 +40,15 @@
             if (!$puzzle.isFinished) return;
             document.getElementById("next").click();
         }
+
         if (e.keyCode >= 65 && e.keyCode <= 90) {
+            if (!e.shiftKey) return;
             const key = e.key.toUpperCase();
-            if ($puzzle.charMap.hasOwnProperty(key)) {
-                return;
-            }
             const inputs = document.getElementsByName(key);
             if (inputs.length === 0) return;
             inputs[0].focus();
         }
+
         if (![8, 9, 16, 17].includes(e.keyCode)) {
             e.preventDefault();
         }
@@ -96,7 +94,16 @@
             disabled={!$puzzle.isFinished}>Next</button
         >
     </div>
-
+    <div class="guide">
+        <h2>Shortcuts</h2>
+        <p>
+            <strong><kbd>Enter</kbd></strong> - Next puzzle
+        </p>
+        <p>
+            <strong><kbd>Shift</kbd> + <kbd>Enter</kbd> </strong> - Focus on the
+            input for that letter
+        </p>
+    </div>
     <!-- <div>
         <h2>Add a quote</h2>
         <NewQuoteForm />

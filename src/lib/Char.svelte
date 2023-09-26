@@ -13,7 +13,7 @@
 <span class="char">
     {#if isAlpha(char)}
         {#if $puzzle.hiddenChars.includes(char)}
-            <CharInput name={char} />
+            <CharInput name={$puzzle.charMap[char]} />
             <span class="key">
                 {$puzzle.charMap[char]}
             </span>

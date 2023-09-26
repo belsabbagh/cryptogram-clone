@@ -42,6 +42,18 @@
             if (!$puzzle.isFinished) return;
             document.getElementById("next").click();
         }
+        if (e.keyCode >= 65 && e.keyCode <= 90) {
+            const key = e.key.toUpperCase();
+            if ($puzzle.charMap.hasOwnProperty(key)) {
+                return;
+            }
+            const inputs = document.getElementsByName(key);
+            if (inputs.length === 0) return;
+            inputs[0].focus();
+        }
+        if (e.keyCode !== 9) {
+            e.preventDefault();
+        }
     }
 
     let difficulty = "easy";

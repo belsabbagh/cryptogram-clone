@@ -1,6 +1,8 @@
 Cryptogram Clone
 ==============
 
+Inspired by [this app](https://play.google.com/store/apps/details?id=com.jmsc.cryptogram)
+
 ## Run Locally
 
 Clone the project

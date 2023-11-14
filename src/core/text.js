@@ -4,13 +4,9 @@ export function isAlpha(input) {
 
 export function sanitizeInput(val) {
     if (!isAlpha(val)) {
-        val = "";
+        return "";
     }
-    if (val > 1) {
-        val = val[0];
-    }
-    val = val.toUpperCase();
-    return val;
+    return (val > 1 ? val[0] : val).toUpperCase();
 }
 
 export function secondsToTime(seconds) {

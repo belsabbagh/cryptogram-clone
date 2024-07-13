@@ -100,7 +100,7 @@
             <strong><kbd>Enter</kbd></strong> - Next puzzle
         </p>
         <p>
-            <strong><kbd>Shift</kbd> + <kbd>Enter</kbd> </strong> - Focus on the
+            <strong><kbd>Shift</kbd> + <kbd>Letter</kbd> </strong> - Focus on the
             input for that letter
         </p>
     </div>

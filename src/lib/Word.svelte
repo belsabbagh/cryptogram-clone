@@ -1,13 +1,13 @@
 <script>
     import Char from "./Char.svelte";
-    export let word;
+    let { word } = $props();
 </script>
 
 <span class="word">
     {#each word as char}
         <Char {char} />
     {/each}
-    <span class="whitespace" />
+    <span class="whitespace"></span>
 </span>
 
 <style>

@@ -54,7 +54,7 @@
         }
     }
 
-    let difficulty = "easy";
+    let difficulty = $state("easy");
     let quote = getRandomQuote();
     puzzle.set(makePuzzle(quote, PRESET_DIFFICULTIES[difficulty]));
 </script>
@@ -63,7 +63,7 @@
     <h1>Cryptogram</h1>
 </header>
 <main>
-    <div class="timer" />
+    <div class="timer"></div>
     <div id="status">
         <Stopwatch />
         {#if $puzzle.isFinished}
@@ -74,7 +74,7 @@
     </div>
     <div class="difficulty">
         Difficulty:
-        <select on:change={setDifficultyAction} bind:value={difficulty}>
+        <select onchange={setDifficultyAction} bind:value={difficulty}>
             <option value="easy">Easy</option>
             <option value="normal">Normal</option>
             <option value="hard">Hard</option>
@@ -86,11 +86,11 @@
         <Puzzle />
     </div>
     <div class="controls">
-        <button on:click={startOverAction}>Clear</button>
+        <button onclick={startOverAction}>Clear</button>
         <button
             id="next"
             class="next"
-            on:click={makePuzzleAction}
+            onclick={makePuzzleAction}
             disabled={!$puzzle.isFinished}>Next</button
         >
     </div>
@@ -110,7 +110,7 @@
     </div> -->
 </main>
 
-<svelte:window on:keydown={handleKeyDown} />
+<svelte:window onkeydown={handleKeyDown} />
 
 <style>
     #status {

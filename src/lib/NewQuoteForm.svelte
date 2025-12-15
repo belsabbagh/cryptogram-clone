@@ -11,9 +11,9 @@
     }
 </script>
 
-<form on:submit={submitQuote}>
+<form onsubmit={submitQuote}>
     <label for="quote">Quote</label>
-    <textarea name="quote" id="quote" cols="30" rows="5" />
+    <textarea name="quote" id="quote" cols="30" rows="5"></textarea>
     <label for="author">Author</label>
     <input type="text" name="author" id="author" />
     <button type="submit">Submit</button>

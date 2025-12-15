@@ -7,7 +7,7 @@
     function specialCharStyle(char) {
         return `special-char ${[",", "."].includes(char) ? "low" : "high"}`;
     }
-    export let char;
+    let { char } = $props();
 </script>
 
 <span class="char">

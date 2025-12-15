@@ -50,15 +50,15 @@
         return answer;
     }
 
-    export let name;
+    let { name } = $props();
 </script>
 
 <input
     {name}
     id={name + Math.random()}
     type="text"
-    on:input={updatePuzzle}
-    on:focus={actionColorOthers}
+    oninput={updatePuzzle}
+    onfocus={actionColorOthers}
     maxlength="1"
     autocomplete="off"
     autocorrect="off"

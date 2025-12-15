@@ -7,6 +7,7 @@ RUN npm run build
 RUN npm prune --production
 
 FROM node:25-alpine
+RUN npm i -g serve
 WORKDIR /app
 COPY --from=builder /app/dist build/
 COPY --from=builder /app/node_modules node_modules/

@@ -8,7 +8,7 @@ import { quotes } from "../assets/quotes.json";
  * Defaults to ['programming'].
  * @returns {object} A random quote object that matches one or more tags, or null if no matching quote is found.
  */
-export function getRandomQuoteByTags(tags = ["programming"]) {
+export function getRandomQuote(tags = ["programming"]) {
 	// 1. Filter the quotes array to only include quotes that contain at least one of the input tags
 	const taggedQuotes = quotes.filter((quote) => {
 		// Ensure the quote has tags and that the quote's tags array has some intersection with the input tags array.

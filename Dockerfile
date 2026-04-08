@@ -1,17 +1,25 @@
-FROM node:25-alpine as builder
+FROM docker.io/oven/bun:1.3-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+COPY package.json bun.lock ./
+RUN ["bun", "ci"]
 COPY . .
-RUN npm run build
-RUN npm prune --production
+RUN ["bun", "run", "build"]
 
-FROM node:25-alpine
-RUN npm i -g serve
+FROM docker.io/oven/bun:1.3-alpine
 WORKDIR /app
-COPY --from=builder /app/dist build/
-COPY --from=builder /app/node_modules node_modules/
-COPY package.json .
-EXPOSE 3000
+
 ENV NODE_ENV=production
-CMD ["serve", "-s", "build", "-l", "3000"]
+ENV PORT=3000
+
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/node_modules ./node_modules
+COPY package.json .
+
+RUN ["apk", "add", "--no-cache", "curl"]
+
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+ENTRYPOINT [ "bun", "./build/index.js" ]
